@@ -11,9 +11,9 @@ const mc = require("mongodb").MongoClient;
 require("dotenv").config();
 
 //import api objects
-const userApiObj = require("./APIs/userApi");
+const userApiObj = require("./APIS/userApi");
 //const productApiObj = require("./APIs/productApi");
-const adminApiObj = require("./APIs/adminApi");
+const adminApiObj = require("./APIS/adminApi");
 
 //import express-async-handler
 //const asyncErrHandler = require("express-async-handler");
@@ -41,7 +41,6 @@ mc.connect(dburl,{useNewUrlParser:true,useUnifiedTopology:true})
 
     //sharing collection object
     app.set("userCollectionObject",userCollectionObject);
-   // app.set("productCollectionObject",productCollectionObject);
     app.set("adminCollectionObject",adminCollectionObject);
     console.log("Connected to database server...");
 })
