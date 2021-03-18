@@ -50,9 +50,9 @@ userApiObj.post("/register", asyncErrHandler(async(req,res,next)=>{
     //get user collection object
     let userCollectionObject = req.app.get("userCollectionObject");
     
-    //console.log("user object is",req.body);
-    let userObj =  JSON.parse(req.body.userObj)
-    //let userObj = req.body;
+    console.log("user object is",req.body);
+    //let userObj =  JSON.parse(req.body.userObj)
+    let userObj = req.body;
 
     //check for user in db
     let user = await userCollectionObject.findOne({username:userObj.username});
@@ -69,7 +69,7 @@ userApiObj.post("/register", asyncErrHandler(async(req,res,next)=>{
         userObj.password = hashedpswd;
 
          //add userImagelink
-         userObj.userImgLink = req.file.path;
+         //userObj.userImgLink = req.file.path;
 
         //create user
         let success = await userCollectionObject.insertOne(userObj);
@@ -132,7 +132,7 @@ userApiObj.put("/updateuser",asyncErrHandler(async(req,res,next)=>{
     })
     res.send({message:"success",new:newUserObj})
 }))
-userApiObj.post("/passwordreset",asyncErrHandler(async(req,res,next)=>{
+userApiObj.post("/forgotpassword",asyncErrHandler(async(req,res,next)=>{
     //get user collectionobject
     let userCollectionObject = req.app.get("userCollectionObject")
     let obj=req.body;

@@ -12,7 +12,7 @@ require("dotenv").config();
 
 //import api objects
 const userApiObj = require("./APIS/userApi");
-//const productApiObj = require("./APIs/productApi");
+const cartApiObj = require("./APIs/cartApi");
 const adminApiObj = require("./APIS/adminApi");
 
 //import express-async-handler
@@ -20,7 +20,7 @@ const adminApiObj = require("./APIS/adminApi");
 
 //forward
 app.use("/user",userApiObj);
-//app.use("/product",productApiObj);
+app.use("/cart",cartApiObj)
 app.use("/admin",adminApiObj);
 
 app.use(exp.static(path.join(__dirname,"./dist/e-commerce")));
@@ -36,12 +36,13 @@ mc.connect(dburl,{useNewUrlParser:true,useUnifiedTopology:true})
     //get database object
     const databaseObject = client.db("ecommerce");
     const userCollectionObject = databaseObject.collection("usercollection");
-    //const productCollectionObject = databaseObject.collection("productcollection");
+    const cartCollectionObject = databaseObject.collection("cartcollection");
     const adminCollectionObject = databaseObject.collection("admincollection");
 
     //sharing collection object
     app.set("userCollectionObject",userCollectionObject);
     app.set("adminCollectionObject",adminCollectionObject);
+    app.set("cartCollectionObject",cartCollectionObject)
     console.log("Connected to database server...");
 })
 .catch(err=>console.log("err in db connection",err));
